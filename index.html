@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>熊市應對 SOP｜6 步實務版 — Alex 財務設計師</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@700;900&family=Noto+Sans+TC:wght@400;500;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  /* ── 四色系統．僅此四色 ────────────────
+     INK    #0B2233  深墨      深底／深字
+     MID    #2C6079  中藍      中層底／次要線
+     SIGNAL #F0A93B  訊號琥珀  重點／數字／標線
+     PAPER  #EEF2F4  紙白      淺底／淺字
+     ──────────────────────────────────── */
+  :root{
+    --ink:#0B2233; --mid:#2C6079; --signal:#F0A93B; --paper:#EEF2F4;
+    --serif:"Noto Serif TC","Songti TC",serif;
+    --sans:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+    --mono:"Roboto Mono",ui-monospace,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:var(--sans);font-weight:400;font-size:18px;line-height:1.9;
+    background:var(--paper);color:var(--ink);-webkit-font-smoothing:antialiased;
+  }
+
+  .ruler{
+    position:fixed;left:0;top:0;bottom:0;width:64px;z-index:50;pointer-events:none;
+    display:flex;flex-direction:column;justify-content:space-between;align-items:center;
+    padding:20px 0;background:var(--ink);border-right:2px solid var(--signal);
+  }
+  .ruler span{font-family:var(--mono);font-weight:700;font-size:14px;color:var(--signal)}
+  .ruler b{
+    font-family:var(--mono);font-size:13px;letter-spacing:.22em;
+    writing-mode:vertical-rl;color:var(--paper);font-weight:400;
+  }
+  .wrap{margin-left:64px}
+  @media(max-width:820px){.ruler{display:none}.wrap{margin-left:0}}
+
+  section{padding:80px 6vw}
+  .inner{max-width:780px;margin:0 auto}
+  .dark{background:var(--ink);color:var(--paper)}
+  .mid{background:var(--mid);color:var(--paper)}
+  .light{background:var(--paper);color:var(--ink)}
+
+  /* 品牌列 */
+  .card{display:flex;gap:20px;align-items:center;flex-wrap:wrap}
+  .card .avatar{
+    width:60px;height:60px;border-radius:50%;flex:none;background:var(--signal);color:var(--ink);
+    display:grid;place-items:center;font-family:var(--serif);font-weight:900;font-size:26px;
+  }
+  .card .name{font-family:var(--serif);font-weight:900;font-size:23px;color:var(--paper)}
+  .card .name b{color:var(--signal)}
+  .card .l1{font-size:16px;margin-top:4px;color:var(--paper)}
+  .card .l2{font-family:var(--mono);font-size:14px;letter-spacing:.08em;margin-top:2px;color:var(--signal)}
+  .topcard{margin-bottom:40px;padding-bottom:28px;border-bottom:2px solid var(--signal)}
+
+  /* hero */
+  .eyebrow{font-family:var(--mono);font-weight:700;font-size:14px;letter-spacing:.28em;color:var(--signal);margin-bottom:20px}
+  h1{font-family:var(--serif);font-weight:900;font-size:clamp(40px,7.4vw,72px);line-height:1.14}
+  h1 em{font-style:normal;color:var(--signal)}
+  .lede{font-size:19px;max-width:34em;margin-top:26px;color:var(--paper)}
+  .lede strong{color:var(--signal);font-weight:700}
+  .chart{margin:44px 0 0;width:100%;height:auto;display:block}
+
+  /* 階段標頭 */
+  .phase{
+    display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;
+    border-top:3px solid var(--signal);padding-top:18px;margin-bottom:48px;
+  }
+  .phase h2{font-family:var(--serif);font-weight:900;font-size:clamp(26px,4vw,36px)}
+  .phase .when{font-family:var(--mono);font-weight:700;font-size:14px;letter-spacing:.14em;margin-left:auto;color:var(--signal)}
+
+  /* 步驟 */
+  .step{display:grid;grid-template-columns:78px 1fr;gap:10px;margin-bottom:52px}
+  .step .no{font-family:var(--mono);font-weight:700;font-size:32px;line-height:1.2;color:var(--signal)}
+  .step h3{font-family:var(--serif);font-weight:900;font-size:24px;margin-bottom:14px}
+  .step p{font-size:18px;max-width:32em}
+  .step p+p{margin-top:12px}
+  .k{font-weight:700;box-shadow:inset 0 -8px 0 rgba(240,169,59,.45)}
+  .dark .k,.mid .k{box-shadow:inset 0 -8px 0 rgba(240,169,59,.35)}
+  @media(max-width:600px){.step{grid-template-columns:1fr}.step .no{font-size:26px}}
+
+  .note{
+    margin-top:18px;padding:14px 18px;font-size:17px;line-height:1.8;
+    border-left:4px solid var(--signal);background:rgba(240,169,59,.14);
+  }
+  .light .note{background:rgba(240,169,59,.2)}
+
+  /* 數字盒 */
+  .num{
+    margin:18px 0;padding:18px 20px;border:2px solid var(--signal);
+    display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;
+  }
+  .num .big{font-family:var(--mono);font-weight:700;font-size:30px;color:var(--signal);line-height:1.2}
+  .num .cap{font-size:17px;font-weight:500}
+
+  /* 順序條列 */
+  ol.seq{list-style:none;counter-reset:s;margin:16px 0 4px}
+  ol.seq li{
+    counter-increment:s;position:relative;padding:11px 0 11px 44px;font-size:17px;
+    border-bottom:1px solid rgba(238,242,244,.3);
+  }
+  .light ol.seq li{border-bottom-color:rgba(11,34,51,.22)}
+  ol.seq li::before{
+    content:counter(s);position:absolute;left:0;top:11px;
+    font-family:var(--mono);font-weight:700;font-size:15px;color:var(--signal);
+    border:2px solid var(--signal);width:28px;height:28px;display:grid;place-items:center;
+  }
+
+  /* A/B 分堆 */
+  .piles{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:20px 0 4px}
+  .pile{padding:20px;border:2px solid currentColor}
+  .pile .tag{font-family:var(--mono);font-weight:700;font-size:14px;letter-spacing:.16em;margin-bottom:10px}
+  .pile .big{font-family:var(--serif);font-weight:900;font-size:19px;margin-bottom:10px;display:block}
+  .pile p{font-size:16px;line-height:1.8}
+  .pile .do{margin-top:12px;font-weight:700;font-size:17px}
+  .pile.a{border-color:var(--signal)}
+  .pile.a .tag,.pile.a .do{color:var(--signal)}
+  @media(max-width:640px){.piles{grid-template-columns:1fr}}
+
+  ul.ask{list-style:none;margin-top:18px}
+  ul.ask li{font-size:18px;padding:12px 0 12px 34px;position:relative;border-bottom:1px solid rgba(238,242,244,.35)}
+  .light ul.ask li{border-bottom-color:rgba(11,34,51,.25)}
+  ul.ask li::before{content:"☐";position:absolute;left:0;top:12px;font-family:var(--mono);font-weight:700;color:var(--signal)}
+
+  .gauge{margin:24px 0 8px;width:100%;height:auto;display:block}
+
+  /* 觸發規則 */
+  .rules{display:grid;gap:10px;margin:18px 0 4px}
+  .rule{
+    display:flex;gap:14px;align-items:baseline;flex-wrap:wrap;
+    padding:14px 16px;border-left:4px solid var(--signal);background:rgba(11,34,51,.1);
+  }
+  .rule .t{font-family:var(--mono);font-weight:700;font-size:18px;color:var(--ink)}
+  .rule .d{font-size:17px}
+
+  /* 條件分流 */
+  .fork{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:18px 0 4px}
+  .fork div{padding:18px;border:2px solid currentColor}
+  .fork .h{font-family:var(--mono);font-weight:700;font-size:15px;color:var(--signal);margin-bottom:8px}
+  .fork p{font-size:16px}
+  @media(max-width:640px){.fork{grid-template-columns:1fr}}
+
+  /* 檢查清單 */
+  .list{border-top:2px solid var(--ink)}
+  .list div{
+    display:grid;grid-template-columns:52px 1fr 30px;align-items:center;gap:12px;
+    padding:16px 4px;border-bottom:1px solid rgba(11,34,51,.25);
+  }
+  .list div span:first-child{font-family:var(--mono);font-weight:700;font-size:16px;color:var(--mid)}
+  .list div span:last-child{text-align:right;font-size:19px;color:var(--mid)}
+  .list div p{font-size:17px}
+
+  .kicker{font-family:var(--serif);font-weight:900;font-size:clamp(23px,3.4vw,30px);line-height:1.5;margin-bottom:20px;color:var(--signal)}
+  .mid p{font-size:18px;max-width:34em}
+  .mid p+p{margin-top:16px}
+
+  footer{background:var(--ink);color:var(--paper);padding:56px 6vw}
+  footer .card{max-width:780px;margin:0 auto}
+  .disc{max-width:780px;margin:36px auto 0;font-size:14px;line-height:1.9;color:var(--mid);border-top:1px solid var(--mid);padding-top:18px}
+
+  *:focus-visible{outline:3px solid var(--signal);outline-offset:3px}
+  @media(prefers-reduced-motion:no-preference){
+    .step,.phase{animation:rise .7s both;animation-timeline:view();animation-range:entry 0% cover 22%}
+    @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  }
+</style>
+</head>
+<body>
+
+<div class="ruler" aria-hidden="true">
+  <span>−40%</span>
+  <b>DEPTH ／ 水 位</b>
+  <span>0%</span>
+</div>
+
+<div class="wrap">
+
+<!-- HERO -->
+<section class="dark">
+  <div class="inner">
+    <div class="card topcard">
+      <div class="avatar">A</div>
+      <div>
+        <div class="name">Alex<b>｜</b>財務設計師</div>
+        <div class="l1">關注我，陪你一起設計理想人生</div>
+        <div class="l2">複雜的事讓我簡單說</div>
+      </div>
+    </div>
+
+    <div class="eyebrow">BEAR MARKET SOP ／ 6 STEPS</div>
+    <h1>熊市應對 SOP<br><em>6 步實務版</em></h1>
+    <p class="lede">每一步都有數字、有動作、做完可以打勾。<br>
+    <strong>第 1 步決定你會不會出局，第 5 步決定你能不能反攻，第 6 步決定你下次還慌不慌。</strong></p>
+
+    <svg class="chart" viewBox="0 0 780 280" role="img" aria-label="從高點起算的三批進場觸發點示意圖">
+      <line x1="0" y1="40" x2="780" y2="40" stroke="#EEF2F4" stroke-width="2"/>
+      <text x="0" y="28" fill="#EEF2F4" font-family="Roboto Mono" font-weight="700" font-size="14">高點 0%</text>
+      <path d="M0,40 L110,54 L180,118 L250,102 L330,168 L420,196 L500,178 L580,222 L660,182 L780,126"
+            fill="none" stroke="#F0A93B" stroke-width="3" stroke-linejoin="round"/>
+      <g stroke="#2C6079" stroke-width="2" stroke-dasharray="5 6">
+        <line x1="0" y1="106" x2="780" y2="106"/>
+        <line x1="0" y1="164" x2="780" y2="164"/>
+        <line x1="0" y1="222" x2="780" y2="222"/>
+      </g>
+      <g font-family="Roboto Mono" font-weight="700" font-size="14" fill="#F0A93B">
+        <text x="0" y="100">−20%　投入第 1 批 · 10%</text>
+        <text x="0" y="158">−30%　投入第 2 批 · 10%</text>
+        <text x="0" y="216">−40%　投入第 3 批 · 10%</text>
+      </g>
+      <circle cx="250" cy="102" r="6" fill="#F0A93B"/>
+      <circle cx="420" cy="164" r="6" fill="#F0A93B"/>
+      <circle cx="580" cy="222" r="6" fill="#F0A93B"/>
+      <text x="0" y="264" font-family="Noto Sans TC" font-weight="500" font-size="15" fill="#EEF2F4">沒觸發就不動。不預測、不加碼、不提前。</text>
+    </svg>
+  </div>
+</section>
+
+<!-- 階段一 -->
+<section class="dark">
+  <div class="inner">
+    <div class="phase">
+      <h2>階段一 · 止血</h2>
+      <span class="when">7 2 小 時 內</span>
+    </div>
+
+    <div class="step">
+      <div class="no">01</div>
+      <div>
+        <h3>去槓桿，照順序砍</h3>
+        <p>先算一個數字：</p>
+        <div class="num">
+          <span class="big">−30%</span>
+          <span class="cap">再跌這麼多，我會被追繳嗎？<br>會的話，今天就動。</span>
+        </div>
+        <p>處理順序：</p>
+        <ol class="seq">
+          <li>融資</li>
+          <li>股票質押</li>
+          <li>選擇權空方部位</li>
+          <li>信貸／保單借款來的錢</li>
+        </ol>
+        <div class="note">目標：槓桿歸零，或至少把融資維持率拉到 <span class="k">200% 以上</span>。</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="no">02</div>
+      <div>
+        <h3>補回生活金</h3>
+        <div class="num">
+          <span class="big">月支出 × 18</span>
+          <span class="cap">低於這個數，就從市場裡提出來補足。</span>
+        </div>
+        <p>這筆錢放定存或貨幣型基金，<span class="k">不列入投資部位計算</span>，也不准拿去攤平。</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="no">03</div>
+      <div>
+        <h3>72 小時 ／ 5% 規則 ＋ 記錄情緒</h3>
+        <p>接下來三天，單筆動作<span class="k">不超過總部位 5%</span>。想砍全部？先睡三覺再說。</p>
+        <p>同時寫下來：<span class="k">睡得著嗎？一天看幾次盤？</span></p>
+        <div class="note">這份紀錄是<span class="k">第 06 步唯一的輸入資料</span>，別跳過。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 階段二 -->
+<section class="mid">
+  <div class="inner">
+    <div class="phase">
+      <h2>階段二 · 盤點</h2>
+      <span class="when">第 一 週</span>
+    </div>
+
+    <div class="step">
+      <div class="no">04</div>
+      <div>
+        <h3>持股分堆 ＋ 逐檔三問</h3>
+        <div class="piles">
+          <div class="pile a">
+            <div class="tag">PILE A</div>
+            <span class="big">獲利模型壞了</span>
+            <p>是公司變了，不是價格變了。</p>
+            <div class="do">→ 處理掉</div>
+          </div>
+          <div class="pile b">
+            <div class="tag">PILE B</div>
+            <span class="big">公司沒事，只是價格跌</span>
+            <p>沒有新的壞消息，只有新的低價。</p>
+            <div class="do">→ 抱住</div>
+          </div>
+        </div>
+        <ul class="ask">
+          <li>買的理由還在嗎？</li>
+          <li>現在是現金，還會買嗎？</li>
+          <li>講得出認錯條件嗎？</li>
+        </ul>
+        <div class="note">兩堆的處理方式<span class="k">完全相反</span>。混在一起想，就一定會錯。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 階段三 -->
+<section class="light">
+  <div class="inner">
+    <div class="phase">
+      <h2>階段三 · 重新配置</h2>
+      <span class="when">第 二 週 後</span>
+    </div>
+
+    <div class="step">
+      <div class="no">05</div>
+      <div>
+        <h3>現金留三成，拆三批寫死觸發點</h3>
+
+        <svg class="gauge" viewBox="0 0 780 150" role="img" aria-label="投資部位配置：股票七成、彈藥現金三成">
+          <rect x="0" y="40" width="546" height="44" fill="#2C6079"/>
+          <rect x="546" y="40" width="234" height="44" fill="#F0A93B"/>
+          <g font-family="Roboto Mono" font-weight="700" font-size="17">
+            <text x="20" y="69" fill="#EEF2F4">股票 70%</text>
+            <text x="566" y="69" fill="#0B2233">彈藥 30%</text>
+          </g>
+          <g font-family="Noto Sans TC" font-weight="500" font-size="15" fill="#0B2233">
+            <text x="0" y="28">投資部位 100%（生活金另計，不在這裡面）</text>
+            <text x="0" y="112">保守型 → 彈藥可拉到 40%</text>
+            <text x="0" y="138">年輕＋收入穩 → 彈藥可降到 20%</text>
+          </g>
+        </svg>
+
+        <p>三成拆三批，從<span class="k">高點</span>起算，寫死：</p>
+        <div class="rules">
+          <div class="rule"><span class="t">−20%</span><span class="d">→ 投入 10%</span></div>
+          <div class="rule"><span class="t">−30%</span><span class="d">→ 投入 10%</span></div>
+          <div class="rule"><span class="t">−40%</span><span class="d">→ 投入 10%</span></div>
+        </div>
+        <div class="note">沒觸發就不動。不預測、不加碼、不提前。<br>
+        剩下最後一批永遠不用完，也沒關係。</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="no">06</div>
+      <div>
+        <h3>依實測承受度重配 ＋ 成本優化</h3>
+        <p>拿<span class="k">第 03 步的紀錄</span>回頭改：</p>
+        <div class="fork">
+          <div>
+            <div class="h">睡不著</div>
+            <p>股票部位砍 10–20 個百分點<br>彈藥提到 40%</p>
+          </div>
+          <div>
+            <div class="h">照睡</div>
+            <p>維持現狀<br>甚至可把彈藥降到 20%</p>
+          </div>
+        </div>
+        <p>順手把成本一起清掉：</p>
+        <div class="num">
+          <span class="big">&gt;1%</span>
+          <span class="cap">內扣費用超過這個數的基金，換掉。<br>帳面虧損做損失收割。</span>
+        </div>
+        <div class="note">重配是<span class="k">修正錯誤假設</span>，不是投降。<br>
+        而成本優化，是熊市唯一「確定賺得到」的錢。</div>
+      </div>
+    </div>
+
+    <div class="phase" style="margin-top:64px">
+      <h2>快速檢查清單</h2>
+    </div>
+    <div class="list">
+      <div><span>01</span><p>槓桿歸零／維持率 200% 以上</p><span>☐</span></div>
+      <div><span>02</span><p>生活金補到月支出 × 18</p><span>☐</span></div>
+      <div><span>03</span><p>72 小時內單筆不超過 5%，情緒已記錄</p><span>☐</span></div>
+      <div><span>04</span><p>持股已分 A／B 堆，逐檔三問</p><span>☐</span></div>
+      <div><span>05</span><p>彈藥 30%，−20／−30／−40 觸發點已寫死</p><span>☐</span></div>
+      <div><span>06</span><p>依實測承受度重配，內扣 &gt;1% 已換掉</p><span>☐</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 結語 -->
+<section class="mid">
+  <div class="inner">
+    <p class="kicker">第 1 步決定你會不會出局。<br>第 5 步決定你能不能反攻。<br>第 6 步決定你下次還慌不慌。</p>
+    <p>以上數字是<strong>示範用的常見設定</strong>，實際要依你自己的收入穩定度、年齡、部位大小調整。</p>
+  </div>
+</section>
+
+<footer>
+  <div class="card">
+    <div class="avatar">A</div>
+    <div>
+      <div class="name">Alex<b>｜</b>財務設計師</div>
+      <div class="l1">關注我，陪你一起設計理想人生</div>
+      <div class="l2">複雜的事讓我簡單說</div>
+    </div>
+  </div>
+  <p class="disc">本文為流程框架與示範數字，非投資建議。實際配置比例仍需依個人財務狀況判斷。</p>
+</footer>
+
+</div>
+</body>
+</html>
